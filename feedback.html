@@ -53,17 +53,10 @@
     </style>
   </head>
   <body>
-    <div id="feedbackForm"></div>
-    <div id="formDiv" style="display:none"></div>
+    <div id="formDiv" ></div>
     <script>
 
       const clientId = "FPDyrG3Mm8VRZ47K";
-      feedbackForm = new Survey123WebForm({
-        clientId: clientId,
-        itemId: "154261091d3846669b2330b520edb8fc",
-        container: "feedbackForm",
-        hideElements: ["navbar"]
-      });
 
       const searchParams = new URLSearchParams(location.search);
       if(searchParams.has('rating')){
@@ -73,14 +66,8 @@
           container: "formDiv",
           onFormLoaded: (data) => {
             ratingForm.setQuestionValue({"how_would_you_rate_the_support_": searchParams.get('rating')})
-            
-            if(data.contentHeight === 0){
-              setTimeout(() => {
-                ratingForm.submitForm();
-                console.log("Feedback saved!", data);
-              }, 2000);
-              //ratingForm.submitForm()
-            }
+            ratingForm.submitForm()
+            console.log("Feedback saved!", data);
           }
         });
       }
